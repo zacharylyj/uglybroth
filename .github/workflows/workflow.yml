@@ -1,1 +1,25 @@
-rah
+name: CI/CD Workflow # Name of your workflow
+
+on: # Triggers the workflow
+  push:
+    branches: [main] # Runs when code is pushed to the main branch
+  pull_request:
+    branches: [main] # Runs when a pull request is made to the main branch
+
+jobs:
+  build_and_test: # Name of the job
+    runs-on: ubuntu-latest # Specifies the OS environment (Ubuntu here)
+
+    steps:
+      - uses: actions/checkout@v3 # Checks out your repository code
+
+      - name: Set up Python 3.9 # Example using Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests
+        run: pytest
